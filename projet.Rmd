@@ -35,7 +35,10 @@ tidy_anime -> df
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
-## Projet R mardown
+### Projet R mardown
+
+## Quels sont les vingt animés avec la plus forte popularité? 
+# Montrez le sous forme de graphique                    "
 
 ```{r}
 df %>%
@@ -45,6 +48,37 @@ df %>%
   slice(1:20) %>%
   ggplot(aes(reorder(name, -popularity), members, fill = name))+
   geom_col(show.legend = F)+
-  coord_flip()
-    
+  coord_flip()+
+  labs(title = "Classement des 20 animés les plus populaires",
+       y = "Nombre de fans en milliers",
+       x = "Nom de l'animé")
 ````
+
+## Quels sont les genres les plus populaires?
+# Montrez le sous forme de graphique
+
+```{r}
+df %>%
+  select(name, genre, members) %>%
+  group_by(genre) %>%
+  summarise( n = n()) %>%
+  arrange(-n) %>%
+  slice(1:20) %>%
+  ggplot(aes(x = genre, y = n, fill = genre))+
+  geom_col(show.legend = F)+
+  coord_flip()+
+  labs(title = "Classement des 20 genres les plus populaires",
+       y = "Nombre de fans en milliers",
+       x = "Type de genre")
+````
+
+## Quels sont les mangas les plus rentables en terme d'épisode?
+# Montrez le sous forme de graphique
+
+```{r}
+df %>%
+  select(name, members, episodes)%>%
+  group_by(name) %>%
+  summarise(rentable = members/episodes) 
+```
+
