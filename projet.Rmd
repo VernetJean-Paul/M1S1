@@ -2,7 +2,9 @@
 title: "Projet"
 author: "Jean-Paul"
 date: "19/09/2019"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -31,9 +33,11 @@ plot(pressure)
 library(tidyverse)
 tidy_anime <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-04-23/tidy_anime.csv")
 tidy_anime -> df
+library(cowplot)
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
 
 ### Projet R mardown
 
@@ -51,7 +55,7 @@ df %>%
   coord_flip()+
   labs(title = "Classement des 20 animés les plus populaires",
        y = "Nombre de fans en milliers",
-       x = "Nom de l'animé")
+       x = "Nom de l'animé") 
 ````
 
 ## Quels sont les genres les plus populaires?
@@ -91,6 +95,34 @@ df %>%
   
 ```
 
+```{r}
+df %>%
+  select(name, popularity, members) %>%
+  distinct() %>%
+  arrange(popularity) %>%
+  slice(1:20) %>%
+  ggplot(aes(reorder(name, -popularity), members, fill = name))+
+  geom_col(show.legend = F)+
+  coord_flip()+
+  labs(title = "Classement des 20 animés les plus populaires",
+       y = "Nombre de fans en milliers",
+       x = "Nom de l'animé") -> c
+
+
+df %>%
+  select(name, popularity, score) %>%
+  distinct() %>%
+  arrange(popularity) %>%
+  slice(1:20) %>%
+  ggplot(aes(reorder(name, -popularity), score, fill = name))+
+  geom_col(show.legend = F)+
+  coord_flip()+
+  labs(title = "Classement des 20 animés les plus populaires",
+       y = "Note sur 10",
+       x = "Nom de l'animé")  -> d
+
+plot_grid(c, d)
+```
 
 
 
