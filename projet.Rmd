@@ -79,6 +79,23 @@ df %>%
 df %>%
   select(name, members, episodes)%>%
   group_by(name) %>%
-  summarise(rentable = members/episodes) 
+  mutate(rentable = members / episodes) %>%
+  arrange(-rentable) %>%
+  ggplot(aes(x = name, y = rentable, fill = name))+
+  geom_col(show.legend = F)+
+  coord_flip()+
+  labs(title = "Classement des 20 genres les plus populaires",
+       y = "Nombre de fans en milliers",
+       x = "Type de genre")
+  
 ```
+
+
+%>%
+  ggplot(aes(x = name, y = rentable, fill = name))+
+  geom_col(show.legend = F)+
+  coord_flip()+
+  labs(title = "Classement des 20 genres les plus populaires",
+       y = "Nombre de fans en milliers",
+       x = "Type de genre")
 
