@@ -72,30 +72,25 @@ df %>%
        x = "Type de genre")
 ````
 
-## Quels sont les mangas les plus rentables en terme d'épisode?
+## Quels sont les periodes d'apparition des 10 mangas les plus populaires dans le temps
 # Montrez le sous forme de graphique
 
 ```{r}
 df %>%
-  select(name, members, episodes)%>%
-  group_by(name) %>%
-  mutate(rentable = members / episodes) %>%
-  arrange(-rentable) %>%
-  ggplot(aes(x = name, y = rentable, fill = name))+
-  geom_col(show.legend = F)+
-  coord_flip()+
-  labs(title = "Classement des 20 genres les plus populaires",
-       y = "Nombre de fans en milliers",
-       x = "Type de genre")
+  select(name, popularity, start_date) %>%
+  distinct() %>%
+  arrange(popularity) %>%
+  slice(1:10) %>%
+  separate(col = start_date, into = c("years", "month"), convert = T) %>%
+  arrange(-years) %>%
+  ggplot(aes(x= years, y = name, colour = name)) +
+  geom_point(show.legend = F) +
+  labs(title = "Apparition des 10 animés les plus populaires dans le temps",
+       y = "Nom des animés",
+       x = "Année")
   
 ```
 
 
-%>%
-  ggplot(aes(x = name, y = rentable, fill = name))+
-  geom_col(show.legend = F)+
-  coord_flip()+
-  labs(title = "Classement des 20 genres les plus populaires",
-       y = "Nombre de fans en milliers",
-       x = "Type de genre")
+
 
