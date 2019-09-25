@@ -128,6 +128,40 @@
 \begin{document}
 \maketitle
 
+\hypertarget{r-markdown}{%
+\subsection{R Markdown}\label{r-markdown}}
+
+This is an R Markdown document. Markdown is a simple formatting syntax
+for authoring HTML, PDF, and MS Word documents. For more details on
+using R Markdown see \url{http://rmarkdown.rstudio.com}.
+
+When you click the \textbf{Knit} button a document will be generated
+that includes both content as well as the output of any embedded R code
+chunks within the document. You can embed an R code chunk like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(cars)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      speed           dist       
+##  Min.   : 4.0   Min.   :  2.00  
+##  1st Qu.:12.0   1st Qu.: 26.00  
+##  Median :15.0   Median : 36.00  
+##  Mean   :15.4   Mean   : 42.98  
+##  3rd Qu.:19.0   3rd Qu.: 56.00  
+##  Max.   :25.0   Max.   :120.00
+\end{verbatim}
+
+\hypertarget{including-plots}{%
+\subsection{Including Plots}\label{including-plots}}
+
+You can also embed plots, for example:
+
+\includegraphics{projet_files/figure-latex/pressure-1.pdf}
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(tidyverse)}
@@ -135,7 +169,7 @@
 \end{Shaded}
 
 \begin{verbatim}
-## -- Attaching packages --------------------------------------- tidyverse 1.2.1 --
+## -- Attaching packages ------------------------------------------------------------------------------ tidyverse 1.2.1 --
 \end{verbatim}
 
 \begin{verbatim}
@@ -146,7 +180,7 @@
 \end{verbatim}
 
 \begin{verbatim}
-## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## -- Conflicts --------------------------------------------------------------------------------- tidyverse_conflicts() --
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()
 \end{verbatim}
@@ -182,8 +216,34 @@
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{tidy_anime ->}\StringTok{ }\NormalTok{df}
+\KeywordTok{library}\NormalTok{(cowplot)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## 
+## ********************************************************
+\end{verbatim}
+
+\begin{verbatim}
+## Note: As of version 1.0.0, cowplot does not change the
+\end{verbatim}
+
+\begin{verbatim}
+##   default ggplot2 theme anymore. To recover the previous
+\end{verbatim}
+
+\begin{verbatim}
+##   behavior, execute:
+##   theme_set(theme_cowplot())
+\end{verbatim}
+
+\begin{verbatim}
+## ********************************************************
+\end{verbatim}
+
+Note that the \texttt{echo\ =\ FALSE} parameter was added to the code
+chunk to prevent printing of the R code that generated the plot.
 
 \hypertarget{projet-r-mardown}{%
 \subsubsection{Projet R mardown}\label{projet-r-mardown}}
@@ -207,8 +267,23 @@ popularité?}\label{quels-sont-les-vingt-animes-avec-la-plus-forte-popularite}}
 \StringTok{  }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{show.legend =}\NormalTok{ F)}\OperatorTok{+}
 \StringTok{  }\KeywordTok{coord_flip}\NormalTok{()}\OperatorTok{+}
 \StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Classement des 20 animés les plus populaires"}\NormalTok{,}
-       \DataTypeTok{y =} \StringTok{"Nombre de fans en milliers"}\NormalTok{,}
-       \DataTypeTok{x =} \StringTok{"Nom de l'animé"}\NormalTok{)}
+       \DataTypeTok{y =} \StringTok{"Nombre de fans (en milliers)"}\NormalTok{,}
+       \DataTypeTok{x =} \StringTok{"Nom de l'animé"}\NormalTok{) ->}\StringTok{ }\NormalTok{c}
+
+
+\NormalTok{df }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(name, popularity, score) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{distinct}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(popularity) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{slice}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{20}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\KeywordTok{reorder}\NormalTok{(name, }\OperatorTok{-}\NormalTok{popularity), score, }\DataTypeTok{fill =}\NormalTok{ name))}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{show.legend =}\NormalTok{ F)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{coord_flip}\NormalTok{()}\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Classement des 20 animés les plus populaires"}\NormalTok{,}
+       \DataTypeTok{y =} \StringTok{"Note sur 10"}\NormalTok{,}
+       \DataTypeTok{x =} \StringTok{"Nom de l'animé"}\NormalTok{)  ->}\StringTok{ }\NormalTok{d}
+
+\KeywordTok{plot_grid}\NormalTok{(c, d)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -234,7 +309,7 @@ graphique}\label{montrez-le-sous-forme-de-graphique-1}}
 \StringTok{  }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{show.legend =}\NormalTok{ F)}\OperatorTok{+}
 \StringTok{  }\KeywordTok{coord_flip}\NormalTok{()}\OperatorTok{+}
 \StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Classement des 20 genres les plus populaires"}\NormalTok{,}
-       \DataTypeTok{y =} \StringTok{"Nombre de fans en milliers"}\NormalTok{,}
+       \DataTypeTok{y =} \StringTok{"Nombre de fans (en milliers)"}\NormalTok{,}
        \DataTypeTok{x =} \StringTok{"Type de genre"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -253,24 +328,19 @@ graphique}\label{montrez-le-sous-forme-de-graphique-2}}
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{df }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{select}\NormalTok{(name, popularity, start_date) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(rating, members) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{distinct}\NormalTok{() }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{arrange}\NormalTok{(popularity) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{slice}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{separate}\NormalTok{(}\DataTypeTok{col =}\NormalTok{ start_date, }\DataTypeTok{into =} \KeywordTok{c}\NormalTok{(}\StringTok{"years"}\NormalTok{, }\StringTok{"month"}\NormalTok{), }\DataTypeTok{convert =}\NormalTok{ T) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{arrange}\NormalTok{(}\OperatorTok{-}\NormalTok{years) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{ years, }\DataTypeTok{y =}\NormalTok{ name, }\DataTypeTok{colour =}\NormalTok{ name)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{show.legend =}\NormalTok{ F) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Apparition des 10 animés les plus populaires dans le temps"}\NormalTok{,}
-       \DataTypeTok{y =} \StringTok{"Nom des animés"}\NormalTok{,}
-       \DataTypeTok{x =} \StringTok{"Année"}\NormalTok{)}
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(rating)}\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(rating) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(., }\DataTypeTok{n =} \KeywordTok{mean}\NormalTok{(members)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ rating, }\DataTypeTok{y =}\NormalTok{ n, }\DataTypeTok{fill =}\NormalTok{ rating))}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{show.legend =}\NormalTok{ F)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{coord_flip}\NormalTok{()}\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Classement des catégories de public"}\NormalTok{,}
+       \DataTypeTok{y =} \StringTok{"Nombre de vues (en milliers)"}\NormalTok{,}
+       \DataTypeTok{x =} \StringTok{"Public visé"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-## Warning: Expected 2 pieces. Additional pieces discarded in 10 rows [1, 2,
-## 3, 4, 5, 6, 7, 8, 9, 10].
-\end{verbatim}
 
 \includegraphics{projet_files/figure-latex/unnamed-chunk-4-1.pdf}
 

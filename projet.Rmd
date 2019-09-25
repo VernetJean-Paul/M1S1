@@ -3,8 +3,8 @@ title: "Projet"
 author: "Jean-Paul"
 date: "19/09/2019"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -39,10 +39,10 @@ library(cowplot)
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
 
-### Projet R mardown
+# Projet R mardown
 
 ## Quels sont les vingt animés avec la plus forte popularité? 
-# Montrez le sous forme de graphique                    "
+### Montrez le sous forme de graphique                    "
 
 ```{r}
 df %>%
@@ -54,7 +54,7 @@ df %>%
   geom_col(show.legend = F)+
   coord_flip()+
   labs(title = "Classement des 20 animés les plus populaires",
-       y = "Nombre de fans en milliers",
+       y = "Nombre de fans (en milliers)",
        x = "Nom de l'animé") -> c
 
 
@@ -70,11 +70,11 @@ df %>%
        y = "Note sur 10",
        x = "Nom de l'animé")  -> d
 
-plot_grid(c, d)
+plot_grid(c,d)
 ````
 
-## Quels sont les genres les plus populaires?
-# Montrez le sous forme de graphique
+# Quels sont les genres les plus populaires?
+## Montrez le sous forme de graphique
 
 ```{r}
 df %>%
@@ -87,12 +87,12 @@ df %>%
   geom_col(show.legend = F)+
   coord_flip()+
   labs(title = "Classement des 20 genres les plus populaires",
-       y = "Nombre de fans en milliers",
+       y = "Nombre de fans (en milliers)",
        x = "Type de genre")
 ````
 
-## Quels sont les periodes d'apparition des 10 mangas les plus populaires dans le temps
-# Montrez le sous forme de graphique
+# Quels sont les periodes d'apparition des 10 mangas les plus populaires dans le temps
+## Montrez le sous forme de graphique
 
 ```{r}
 df %>%
@@ -105,7 +105,7 @@ df %>%
   geom_col(show.legend = F)+
   coord_flip()+
   labs(title = "Classement des catégories de public",
-       y = "Nombre de vues",
+       y = "Nombre de vues (en milliers)",
        x = "Public visé")
 ````
 
