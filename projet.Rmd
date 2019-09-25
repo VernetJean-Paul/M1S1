@@ -55,7 +55,22 @@ df %>%
   coord_flip()+
   labs(title = "Classement des 20 animés les plus populaires",
        y = "Nombre de fans en milliers",
-       x = "Nom de l'animé") 
+       x = "Nom de l'animé") -> c
+
+
+df %>%
+  select(name, popularity, score) %>%
+  distinct() %>%
+  arrange(popularity) %>%
+  slice(1:20) %>%
+  ggplot(aes(reorder(name, -popularity), score, fill = name))+
+  geom_col(show.legend = F)+
+  coord_flip()+
+  labs(title = "Classement des 20 animés les plus populaires",
+       y = "Note sur 10",
+       x = "Nom de l'animé")  -> d
+
+plot_grid(c, d)
 ````
 
 ## Quels sont les genres les plus populaires?
@@ -81,48 +96,20 @@ df %>%
 
 ```{r}
 df %>%
-  select(name, popularity, start_date) %>%
+  select(rating, members) %>%
   distinct() %>%
-  arrange(popularity) %>%
-  slice(1:10) %>%
-  separate(col = start_date, into = c("years", "month"), convert = T) %>%
-  arrange(-years) %>%
-  ggplot(aes(x= years, y = name, colour = name)) +
-  geom_point(show.legend = F) +
-  labs(title = "Apparition des 10 animés les plus populaires dans le temps",
-       y = "Nom des animés",
-       x = "Année")
-  
-```
-
-```{r}
-df %>%
-  select(name, popularity, members) %>%
-  distinct() %>%
-  arrange(popularity) %>%
-  slice(1:20) %>%
-  ggplot(aes(reorder(name, -popularity), members, fill = name))+
+  arrange(rating)%>%
+  group_by(rating) %>%
+  mutate(., n = mean(members)) %>%
+  ggplot(aes(x = rating, y = n, fill = rating))+
   geom_col(show.legend = F)+
   coord_flip()+
-  labs(title = "Classement des 20 animés les plus populaires",
-       y = "Nombre de fans en milliers",
-       x = "Nom de l'animé") -> c
+  labs(title = "Classement des catégories de public",
+       y = "Nombre de vues",
+       x = "Public visé")
+````
 
 
-df %>%
-  select(name, popularity, score) %>%
-  distinct() %>%
-  arrange(popularity) %>%
-  slice(1:20) %>%
-  ggplot(aes(reorder(name, -popularity), score, fill = name))+
-  geom_col(show.legend = F)+
-  coord_flip()+
-  labs(title = "Classement des 20 animés les plus populaires",
-       y = "Note sur 10",
-       x = "Nom de l'animé")  -> d
-
-plot_grid(c, d)
-```
 
 
 
