@@ -164,29 +164,6 @@ You can also embed plots, for example:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(tidyverse)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## -- Attaching packages ------------------------------------------------------------------------------ tidyverse 1.2.1 --
-\end{verbatim}
-
-\begin{verbatim}
-## v ggplot2 3.2.1     v purrr   0.3.2
-## v tibble  2.1.3     v dplyr   0.8.3
-## v tidyr   0.8.3     v stringr 1.4.0
-## v readr   1.3.1     v forcats 0.4.0
-\end{verbatim}
-
-\begin{verbatim}
-## -- Conflicts --------------------------------------------------------------------------------- tidyverse_conflicts() --
-## x dplyr::filter() masks stats::filter()
-## x dplyr::lag()    masks stats::lag()
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \NormalTok{tidy_anime <-}\StringTok{ }\NormalTok{readr}\OperatorTok{::}\KeywordTok{read_csv}\NormalTok{(}\StringTok{"https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-04-23/tidy_anime.csv"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -211,6 +188,29 @@ You can also embed plots, for example:
 
 \begin{verbatim}
 ## See spec(...) for full column specifications.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching packages ------------------------------------------------------------------------------- tidyverse 1.2.1 --
+\end{verbatim}
+
+\begin{verbatim}
+## v ggplot2 3.2.1     v purrr   0.3.2
+## v tibble  2.1.3     v dplyr   0.8.3
+## v tidyr   0.8.3     v stringr 1.4.0
+## v readr   1.3.1     v forcats 0.4.0
+\end{verbatim}
+
+\begin{verbatim}
+## -- Conflicts ---------------------------------------------------------------------------------- tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
 \end{verbatim}
 
 \begin{Shaded}
@@ -245,16 +245,36 @@ You can also embed plots, for example:
 Note that the \texttt{echo\ =\ FALSE} parameter was added to the code
 chunk to prevent printing of the R code that generated the plot.
 
-\hypertarget{projet-r-mardown}{%
-\subsubsection{Projet R mardown}\label{projet-r-mardown}}
+\hypertarget{projet-r-analyse-de-donnees-sur-les-animes-asiatiques}{%
+\section{Projet R : Analyse de données sur les animés
+asiatiques}\label{projet-r-analyse-de-donnees-sur-les-animes-asiatiques}}
 
-\hypertarget{quels-sont-les-vingt-animes-avec-la-plus-forte-popularite}{%
-\subsection{Quels sont les vingt animés avec la plus forte
-popularité?}\label{quels-sont-les-vingt-animes-avec-la-plus-forte-popularite}}
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dim}\NormalTok{(df)}
+\end{Highlighting}
+\end{Shaded}
 
-\hypertarget{montrez-le-sous-forme-de-graphique}{%
-\section{Montrez le sous forme de graphique
-"}\label{montrez-le-sous-forme-de-graphique}}
+\begin{verbatim}
+## [1] 77911    28
+\end{verbatim}
+
+\begin{quote}
+Nous allons chercher a analyser les 20000 animés asiatiques, traités
+sous 28 variables différentes comme le numero identifiants, le nom, la
+date de sortie, le nombre de fans\ldots{} Pour des raisons de
+visibilité, nous allons d'abord nous concentrés sur le top des animés
+les plus vus et les mieux notés.
+\end{quote}
+
+\hypertarget{quels-sont-les-vingt-animes-avec-la-plus-forte-popularite-et-les-notes-de-ceux-ci}{%
+\subsection{Quels sont les vingt animés avec la plus forte popularité?
+et les notes de
+ceux-ci?}\label{quels-sont-les-vingt-animes-avec-la-plus-forte-popularite-et-les-notes-de-ceux-ci}}
+
+\hypertarget{montre-sous-forme-de-graphique}{%
+\subsubsection{Montré sous forme de graphique
+"}\label{montre-sous-forme-de-graphique}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -267,7 +287,7 @@ popularité?}\label{quels-sont-les-vingt-animes-avec-la-plus-forte-popularite}}
 \StringTok{  }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{show.legend =}\NormalTok{ F)}\OperatorTok{+}
 \StringTok{  }\KeywordTok{coord_flip}\NormalTok{()}\OperatorTok{+}
 \StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Classement des 20 animés les plus populaires"}\NormalTok{,}
-       \DataTypeTok{y =} \StringTok{"Nombre de fans (en milliers)"}\NormalTok{,}
+       \DataTypeTok{y =} \StringTok{"Nombre de vues"}\NormalTok{,}
        \DataTypeTok{x =} \StringTok{"Nom de l'animé"}\NormalTok{) ->}\StringTok{ }\NormalTok{c}
 
 
@@ -283,19 +303,29 @@ popularité?}\label{quels-sont-les-vingt-animes-avec-la-plus-forte-popularite}}
        \DataTypeTok{y =} \StringTok{"Note sur 10"}\NormalTok{,}
        \DataTypeTok{x =} \StringTok{"Nom de l'animé"}\NormalTok{)  ->}\StringTok{ }\NormalTok{d}
 
-\KeywordTok{plot_grid}\NormalTok{(c, d)}
+\KeywordTok{plot_grid}\NormalTok{(c,d)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{projet_files/figure-latex/unnamed-chunk-2-1.pdf}
+\includegraphics{projet_files/figure-latex/unnamed-chunk-3-1.pdf}
+
+\begin{quote}
+Nous constatons que les animés les plus vus ne sont cependant pas les
+mieux notés. On est en droit de se demander les raisons de cette
+tendance.Une des raisons possibles serait le genre de l'animé, en
+sachant qu'un genre peux amener un grand nombre de regardant, parce que
+sa forme et/ou son fond sont très appréciés, mais cependnat il peut ne
+pas être le mieux notés. Nous allons donc chercher a savoir les genres
+amenant le plus de regardant.
+\end{quote}
 
 \hypertarget{quels-sont-les-genres-les-plus-populaires}{%
-\subsection{Quels sont les genres les plus
+\section{Quels sont les genres les plus
 populaires?}\label{quels-sont-les-genres-les-plus-populaires}}
 
-\hypertarget{montrez-le-sous-forme-de-graphique-1}{%
-\section{Montrez le sous forme de
-graphique}\label{montrez-le-sous-forme-de-graphique-1}}
+\hypertarget{montre-sous-forme-de-graphique-1}{%
+\subsection{Montré sous forme de
+graphique}\label{montre-sous-forme-de-graphique-1}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -309,21 +339,27 @@ graphique}\label{montrez-le-sous-forme-de-graphique-1}}
 \StringTok{  }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{show.legend =}\NormalTok{ F)}\OperatorTok{+}
 \StringTok{  }\KeywordTok{coord_flip}\NormalTok{()}\OperatorTok{+}
 \StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Classement des 20 genres les plus populaires"}\NormalTok{,}
-       \DataTypeTok{y =} \StringTok{"Nombre de fans (en milliers)"}\NormalTok{,}
+       \DataTypeTok{y =} \StringTok{"Nombre de vues"}\NormalTok{,}
        \DataTypeTok{x =} \StringTok{"Type de genre"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{projet_files/figure-latex/unnamed-chunk-3-1.pdf}
+\includegraphics{projet_files/figure-latex/unnamed-chunk-4-1.pdf}
 
-\hypertarget{quels-sont-les-periodes-dapparition-des-10-mangas-les-plus-populaires-dans-le-temps}{%
-\subsection{Quels sont les periodes d'apparition des 10 mangas les plus
-populaires dans le
-temps}\label{quels-sont-les-periodes-dapparition-des-10-mangas-les-plus-populaires-dans-le-temps}}
+\begin{quote}
+Nous constatons donc que les genres Comedy, Action et Fantasy sont les
+genres les plus appréciés. La deuxieme raison, peut etre la catégorie de
+public visé. Nous allons donc nous concentré nos efforts sur cette
+variable en observant le nombre de fans par rapport a la catégorie visé.
+\end{quote}
 
-\hypertarget{montrez-le-sous-forme-de-graphique-2}{%
-\section{Montrez le sous forme de
-graphique}\label{montrez-le-sous-forme-de-graphique-2}}
+\hypertarget{quels-sont-les-categories-les-plus-populaires}{%
+\section{Quels sont les catégories les plus
+populaires?}\label{quels-sont-les-categories-les-plus-populaires}}
+
+\hypertarget{montre-sous-forme-de-graphique-2}{%
+\subsection{Montré sous forme de
+graphique}\label{montre-sous-forme-de-graphique-2}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -337,12 +373,67 @@ graphique}\label{montrez-le-sous-forme-de-graphique-2}}
 \StringTok{  }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{show.legend =}\NormalTok{ F)}\OperatorTok{+}
 \StringTok{  }\KeywordTok{coord_flip}\NormalTok{()}\OperatorTok{+}
 \StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Classement des catégories de public"}\NormalTok{,}
-       \DataTypeTok{y =} \StringTok{"Nombre de vues (en milliers)"}\NormalTok{,}
+       \DataTypeTok{y =} \StringTok{"Nombre de vues"}\NormalTok{,}
        \DataTypeTok{x =} \StringTok{"Public visé"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{projet_files/figure-latex/unnamed-chunk-4-1.pdf}
+\includegraphics{projet_files/figure-latex/unnamed-chunk-5-1.pdf}
+
+\begin{quote}
+Ici, nous constatons que les publics les plus nombreux sont 13 ans ou
+plus, 17 ans et plus (violences physique et verbale) et avec de la
+nudité. Pour finir, nous allons donc regardé le genre et la catégorie de
+public visé des 20 mangas les plus regardés pour voir si cela coincide.
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(name, popularity, rating, genre) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{distinct}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(popularity) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{slice}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{59}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 59 x 4
+##    name               popularity rating                        genre       
+##    <chr>                   <dbl> <chr>                         <chr>       
+##  1 Death Note                  1 R - 17+ (violence & profanit~ Mystery     
+##  2 Death Note                  1 R - 17+ (violence & profanit~ Police      
+##  3 Death Note                  1 R - 17+ (violence & profanit~ Psychologic~
+##  4 Death Note                  1 R - 17+ (violence & profanit~ Supernatural
+##  5 Death Note                  1 R - 17+ (violence & profanit~ Thriller    
+##  6 Death Note                  1 R - 17+ (violence & profanit~ Shounen     
+##  7 Shingeki no Kyojin          2 R - 17+ (violence & profanit~ Action      
+##  8 Shingeki no Kyojin          2 R - 17+ (violence & profanit~ Military    
+##  9 Shingeki no Kyojin          2 R - 17+ (violence & profanit~ Mystery     
+## 10 Shingeki no Kyojin          2 R - 17+ (violence & profanit~ Super Power 
+## # ... with 49 more rows
+\end{verbatim}
+
+\begin{quote}
+Pour conclure, nous pouvons dire que les mangas les plus vu coincident
+majoritairement avec notre analyse antérieur, cependant ce n'est pas
+parfait. Une analyse générationnel pourrait être une bonne idée.
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(name, popularity, rating, genre) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{distinct}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(popularity) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{slice}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{59}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ genre, }\DataTypeTok{y =}\NormalTok{ popularity, }\DataTypeTok{fill =}\NormalTok{ genre))}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_col}\NormalTok{(}\DataTypeTok{show.legend =}\NormalTok{ F)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{coord_flip}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{projet_files/figure-latex/unnamed-chunk-7-1.pdf}
 
 
 \end{document}

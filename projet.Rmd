@@ -41,12 +41,12 @@ Note that the `echo = FALSE` parameter was added to the code chunk to prevent pr
 
 # Projet R : Analyse de données sur les animés asiatiques
 
-dim(df)
+
 ```{r}
 dim(df)
 ```
 
-> Nous allons chercher a analyser les 77911 episodes d'animés asiatiques, traités sous 28 variables différentes comme le numero identifiants, le nom, la date de sortie, le nombre de fans... 
+> Nous allons chercher a analyser les 20000 animés asiatiques, traités sous 28 variables différentes comme le numero identifiants, le nom, la date de sortie, le nombre de fans... 
 Pour des raisons de visibilité, nous allons d'abord nous concentrés sur le top des animés les plus vus et les mieux notés.
 
 ## Quels sont les vingt animés avec la plus forte popularité? et les notes de ceux-ci? 
@@ -62,7 +62,7 @@ df %>%
   geom_col(show.legend = F)+
   coord_flip()+
   labs(title = "Classement des 20 animés les plus populaires",
-       y = "Nombre de fans (en milliers)",
+       y = "Nombre de vues",
        x = "Nom de l'animé") -> c
 
 
@@ -98,7 +98,7 @@ df %>%
   geom_col(show.legend = F)+
   coord_flip()+
   labs(title = "Classement des 20 genres les plus populaires",
-       y = "Nombre de fans (en milliers)",
+       y = "Nombre de vues",
        x = "Type de genre")
 ````
 
@@ -119,7 +119,7 @@ df %>%
   geom_col(show.legend = F)+
   coord_flip()+
   labs(title = "Classement des catégories de public",
-       y = "Nombre de vues (en milliers)",
+       y = "Nombre de vues",
        x = "Public visé")
 ````
 
@@ -145,6 +145,8 @@ df %>%
   ggplot(aes(x = genre, y = popularity, fill = genre))+
   geom_col(show.legend = F)+
   coord_flip()
-```
+````
+
+
 
 
